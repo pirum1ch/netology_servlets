@@ -8,7 +8,7 @@ import java.util.List;
 
 public class PostService {
 
-    int COUNTER = 0;
+    private int counter = 0;
 
     private final PostRepository repository;
 
@@ -37,7 +37,7 @@ public class PostService {
             updatePost.setContent(post.getContent());
             post = updatePost;
         } else {
-            post.setId(++COUNTER);
+            post.setId(++counter);
         }
         return repository.save(post);
     }

@@ -9,7 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class PostRepository {
 
-    Map map;
+    private Map map;
 
     public PostRepository() {
         //немного наполним базу
