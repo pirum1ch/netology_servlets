@@ -1,7 +1,9 @@
 package ru.netology.repository;
 
 import ru.netology.model.Post;
+import ru.netology.service.PostService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -9,7 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class PostRepository {
 
-    private Map map;
+    private Map<Long, Post> map;
 
     public PostRepository() {
         //немного наполним базу
@@ -17,13 +19,13 @@ public class PostRepository {
         Post post2 = new Post(2, "Post2");
 
         //использую вариант мапы для многопоточности. Крайне быстро работает на чтение
-        map = new ConcurrentHashMap<Long, Post>();
+        map = new ConcurrentHashMap();
         map.put(post1.getId(), post1);
         map.put(post2.getId(), post2);
     }
 
     public List<Post> all() {
-        return map.entrySet().stream().toList();
+        return map.entrySet().stream().map(x -> x.getValue()).toList();
     }
 
     public Optional<Post> getById(long id) {
